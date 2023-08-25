@@ -54,6 +54,30 @@ const UserController = {
     catch(ex) {
         return res.json({ success: false, message: ex });
     }
+},
+
+updateProfileUser: async function(req, res) {
+    try {
+        const {userId, profilePicture} = req.body;
+
+
+        if (!profilePicture) {
+            return res.json({ error: 'profilePicture is required' });
+          }
+
+        const updatedUser = await UserModel.findOneAndUpdate(
+            { _id: userId },
+            {
+                profilePicture: profilePicture
+            },
+            { new: true }
+        );
+
+        return res.json({ success: true, data: updatedUser, message: "User profile pic updated!" });
+    }
+    catch(ex) {
+        return res.json({ success: false, message: "User not found" });
+    }
 }
 
 };
