@@ -14,7 +14,8 @@ const userSchema = new Schema({
     state: { type: String, default: "" },
     profileProgress: { type: Number, default: 0 },
     updatedOn: { type: Date },
-    createdOn: { type: Date }
+    createdOn: { type: Date },
+    key:{type:String,default:""}
 });
 
 userSchema.pre('save', function(next) {
